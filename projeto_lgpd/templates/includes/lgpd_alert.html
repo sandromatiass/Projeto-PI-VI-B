@@ -1,0 +1,23 @@
+
+<div id="lgpdAlert" class="alert alert-info alert-dismissible fade show fixed-bottom m-3" role="alert" style="display: none;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-10">
+                <h6 class="alert-heading mb-1">
+                    <i class="fas fa-shield-alt me-2"></i>Proteção de Dados - LGPD
+                </h6>
+                <p class="mb-0 small">
+                    Utilizamos cookies e tecnologias semelhantes para melhorar sua experiência, 
+                    analisar o uso do site e personalizar conteúdos. Ao continuar navegando, 
+                    você concorda com nossa <a href="{% url 'termos_lgpd' %}" class="alert-link">Política de Privacidade</a> 
+                    e <a href="{% url 'termos_lgpd' %}" class="alert-link">Termos de Uso</a>.
+                </p>
+            </div>
+            <div class="col-md-2 text-end">
+                <button type="button" class="btn btn-primary btn-sm" onclick="aceitarLGPD()">
+                    <i class="fas fa-check me-1"></i>Aceitar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

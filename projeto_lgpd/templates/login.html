@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Sistema de Denúncias LGPD{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-sign-in-alt"></i> Login</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Usuário</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                            <div class="text-danger">{{ form.username.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label">Senha</label>
+                            {{ form.password }}
+                            {% if form.password.errors %}
+                            <div class="text-danger">{{ form.password.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt"></i> Entrar
+                            </button>
+                        </div>
+                    </form>
+
+                    <hr>
+
+                    <div class="text-center">
+                        <p>Não tem uma conta? <a href="{% url 'cadastro' %}" class="text-decoration-none">Cadastre-se
+                                aqui</a></p>
+                        <p>Ou faça uma <a href="{% url 'denuncia_anonima' %}" class="text-decoration-none">denúncia
+                                anônima</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

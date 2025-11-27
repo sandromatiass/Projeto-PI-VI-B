@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Termos de Uso e LGPD - Sistema de Denúncias LGPD{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"><i class="fas fa-gavel"></i> Termos de Uso e Política de Privacidade - LGPD</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Importante:</strong> Este sistema foi desenvolvido em conformidade com a 
+                        Lei Geral de Proteção de Dados (Lei 13.709/2018).
+                    </div>
+
+                    <h4 class="mt-4">1. Coleta e Uso de Dados</h4>
+                    <p>Coletamos apenas os dados necessários para o processamento das denúncias:</p>
+                    <ul>
+                        <li><strong>Denúncia Anônima:</strong> Apenas os dados da denúncia e metadados técnicos (IP, user agent)</li>
+                        <li><strong>Denúncia Identificada:</strong> Dados da conta do usuário e dados de contato opcionais</li>
+                    </ul>
+
+                    <h4 class="mt-4">2. Finalidade do Tratamento</h4>
+                    <p>Os dados coletados são utilizados exclusivamente para:</p>
+                    <ul>
+                        <li>Processar e analisar denúncias de violações da LGPD</li>
+                        <li>Manter histórico para fins legais e regulatórios</li>
+                        <li>Comunicar-se com o denunciante quando necessário</li>
+                    </ul>
+
+                    <h4 class="mt-4">3. Compartilhamento de Dados</h4>
+                    <p>Não compartilhamos dados pessoais com terceiros, exceto:</p>
+                    <ul>
+                        <li>Por determinação judicial ou requisição de autoridade competente</li>
+                        <li>Para cumprimento de obrigação legal ou regulatória</li>
+                    </ul>
+
+                    <h4 class="mt-4">4. Direitos do Titular</h4>
+                    <p>Conforme a LGPD, você tem direito a:</p>
+                    <ul>
+                        <li>Confirmar a existência de tratamento de dados</li>
+                        <li>Acessar seus dados pessoais</li>
+                        <li>Corrigir dados incompletos, inexatos ou desatualizados</li>
+                        <li>Anonimizar, bloquear ou eliminar dados desnecessários</li>
+                        <li>Eliminar dados tratados com consentimento</li>
+                        <li>Revogar o consentimento a qualquer momento</li>
+                    </ul>
+
+                    <h4 class="mt-4">5. Segurança dos Dados</h4>
+                    <p>Implementamos medidas de segurança técnicas e administrativas para proteger seus dados contra:</p>
+                    <ul>
+                        <li>Acessos não autorizados</li>
+                        <li>Situações acidentais ou ilícitas</li>
+                        <li>Perda, alteração, comunicação ou destruição</li>
+                    </ul>
+
+                    <h4 class="mt-4">6. Retenção de Dados</h4>
+                    <p>As denúncias são mantidas pelo prazo necessário para:</p>
+                    <ul>
+                        <li>Cumprimento de obrigações legais</li>
+                        <li>Exercício regular de direitos</li>
+                        <li>Preservação de provas e histórico</li>
+                    </ul>
+
+                    <h4 class="mt-4">7. Consentimento</h4>
+                    <p>Ao utilizar este sistema, você concorda com:</p>
+                    <ul>
+                        <li>Coleta e tratamento de dados conforme esta política</li>
+                        <li>Uso de cookies essenciais para funcionamento do sistema</li>
+                        <li>Comunicações relacionadas ao andamento das denúncias</li>
+                    </ul>
+
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Encarregado de Proteção de Dados (DPO):</strong><br>
+                        Para exercer seus direitos ou esclarecer dúvidas sobre proteção de dados, 
+                        entre em contato com nosso Encarregado através do e-mail: dpo@denunciaslgpd.com
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <p class="text-muted">
+                            Última atualização: {% now "d/m/Y" %}<br>
+                            Sistema desenvolvido em conformidade com a Lei 13.709/2018 (LGPD)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

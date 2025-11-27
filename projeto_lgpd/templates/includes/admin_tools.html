@@ -1,0 +1,10 @@
+{% if user.is_staff %}
+<div class="position-fixed bottom-0 end-0 m-3">
+    <div class="btn-group-vertical">
+        <button type="button" class="btn btn-warning btn-sm" onclick="revogarConsentimento()" 
+                title="Revogar consentimento LGPD (apenas para testes)">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+    </div>
+</div>
+{% endif %}

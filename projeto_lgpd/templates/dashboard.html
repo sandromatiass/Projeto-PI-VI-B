@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Sistema de Denúncias LGPD{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+            <p class="text-muted">Acompanhe suas denúncias</p>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'nova_denuncia' %}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Nova Denúncia
+            </a>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ total_denuncias }}</h4>
+                            <p>Total de Denúncias</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-clipboard-list fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ denuncias_pendentes }}</h4>
+                            <p>Pendentes</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-clock fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ user.username }}</h4>
+                            <p>Seu Usuário</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-user fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-list"></i> Minhas Denúncias</h5>
+        </div>
+        <div class="card-body">
+            {% if denuncias %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Protocolo</th>
+                                <th>Título</th>
+                                <th>Tipo</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for denuncia in denuncias %}
+                            <tr>
+                                <td>#{{ denuncia.id }}</td>
+                                <td>{{ denuncia.titulo }}</td>
+                                <td>{{ denuncia.get_tipo_display }}</td>
+                                <td>{{ denuncia.data_criacao|date:"d/m/Y" }}</td>
+                                <td>
+                                    <span class="badge status-{{ denuncia.status }}">
+                                        {{ denuncia.get_status_display }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{% url 'detalhes_denuncia' denuncia.id %}" 
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i> Ver
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                    <h5>Nenhuma denúncia encontrada</h5>
+                    <p class="text-muted">Você ainda não fez nenhuma denúncia identificada.</p>
+                    <a href="{% url 'nova_denuncia' %}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Fazer Primeira Denúncia
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

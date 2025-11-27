@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-4">
+            <i class="fas fa-shield-alt"></i><br>
+            Sistema de Denúncias LGPD
+        </h1>
+        <p class="lead mb-4">Proteja seus dados pessoais. Faça denúncias de violações da LGPD de forma segura e anônima.</p>
+        
+       
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="card card-hover h-100">
+                    <div class="card-body">
+                        <i class="fas fa-user-secret fa-3x text-primary mb-3"></i>
+                        <h4>Denúncia Anônima</h4>
+                        <p>Faça sua denúncia sem se identificar. Seus dados pessoais serão protegidos.</p>
+                        <a href="{% url 'denuncia_anonima' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-arrow-right"></i> Denunciar Anonimamente
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card card-hover h-100">
+                    <div class="card-body">
+                        <i class="fas fa-search fa-3x text-info mb-3"></i>
+                        <h4>Acompanhar Denúncia</h4>
+                        <p>Já fez uma denúncia anônima? Acompanhe o andamento com seu token.</p>
+                        <a href="{% url 'acompanhamento' %}" class="btn btn-info btn-lg">
+                            <i class="fas fa-search"></i> Acompanhar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card card-hover h-100">
+                    <div class="card-body">
+                        <i class="fas fa-user-check fa-3x text-success mb-3"></i>
+                        <h4>Denúncia Identificada</h4>
+                        <p>Faça login ou crie uma conta para acompanhar o andamento das suas denúncias.</p>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'nova_denuncia' %}" class="btn btn-success btn-lg">
+                                <i class="fas fa-plus"></i> Nova Denúncia
+                            </a>
+                        {% else %}
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'login' %}" class="btn btn-success">
+                                    <i class="fas fa-sign-in-alt"></i> Fazer Login
+                                </a>
+                                <a href="{% url 'cadastro' %}" class="btn btn-outline-success">
+                                    <i class="fas fa-user-plus"></i> Criar Conta
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="text-center">
+                <i class="fas fa-lock fa-2x text-primary mb-3"></i>
+                <h5>Segurança</h5>
+                <p class="small">Todas as denúncias são tratadas com total confidencialidade.</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+                <i class="fas fa-gavel fa-2x text-warning mb-3"></i>
+                <h5>Conformidade LGPD</h5>
+                <p class="small">Sistema em conformidade com a Lei Geral de Proteção de Dados.</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+                <i class="fas fa-clock fa-2x text-info mb-3"></i>
+                <h5>Rápido e Fácil</h5>
+                <p class="small">Processo simplificado para realizar denúncias em poucos minutos.</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center">
+                <i class="fas fa-user-secret fa-2x text-success mb-3"></i>
+                <h5>Anonimato</h5>
+                <p class="small">Opção de denúncia totalmente anônima com token de acompanhamento.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% if not user.is_authenticated %}
+<div class="bg-light py-5">
+    <div class="container text-center">
+        <h3 class="mb-3">Não sabe por onde começar?</h3>
+        <p class="lead mb-4">Escolha a opção que melhor se adequa à sua necessidade:</p>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <a href="{% url 'denuncia_anonima' %}" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-user-secret me-2"></i>Quero Denunciar Anonimamente
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{% url 'acompanhamento' %}" class="btn btn-outline-info w-100">
+                            <i class="fas fa-search me-2"></i>Já Denunciei e Quero Acompanhar
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{% url 'cadastro' %}" class="btn btn-outline-success w-100">
+                            <i class="fas fa-user-plus me-2"></i>Quero Criar uma Conta
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

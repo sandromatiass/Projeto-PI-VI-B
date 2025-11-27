@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}Acompanhamento de Denúncia - Sistema de Denúncias LGPD{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0"><i class="fas fa-search"></i> Acompanhar Denúncia Anônima</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-user-secret"></i>
+                        <strong>Atenção:</strong> Esta funcionalidade permite acompanhar denúncias anônimas 
+                        usando o token fornecido no momento do envio.
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="id_token" class="form-label">Token de Acompanhamento</label>
+                            {{ form.token }}
+                            {% if form.token.errors %}
+                                <div class="text-danger">{{ form.token.errors }}</div>
+                            {% endif %}
+                            <div class="form-text">
+                                Cole aqui o token que você recebeu ao enviar a denúncia anônima.
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-info btn-lg">
+                                <i class="fas fa-search"></i> Buscar Denúncia
+                            </button>
+                        </div>
+                    </form>
+                    
+                    {% if denuncia %}
+                    <hr>
+                    <div class="mt-4">
+                        <h5><i class="fas fa-clipboard-check"></i> Detalhes da Denúncia</h5>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <strong>Protocolo:</strong> #{{ denuncia.id }} | 
+                                <strong>Token:</strong> <code>{{ token }}</code>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>Status:</strong>
+                                        <span class="badge status-{{ denuncia.status }} ms-2">
+                                            {{ denuncia.get_status_display }}
+                                        </span><br>
+                                        
+                                        <strong>Data de Criação:</strong> 
+                                        {{ denuncia.data_criacao|date:"d/m/Y H:i" }}<br>
+                                        
+                                        <strong>Data da Ocorrência:</strong> 
+                                        {{ denuncia.data_ocorrencia|date:"d/m/Y" }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Tipo:</strong> {{ denuncia.get_tipo_display }}<br>
+                                        <strong>Título:</strong> {{ denuncia.titulo }}
+                                    </div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <strong>Descrição:</strong>
+                                <div class="border p-3 bg-light rounded mt-2">
+                                    {{ denuncia.descricao|linebreaks }}
+                                </div>
+                                
+                                {% if denuncia.observacoes_internas %}
+                                <hr>
+                                <strong>Observações da Análise:</strong>
+                                <div class="border p-3 bg-light rounded mt-2">
+                                    {{ denuncia.observacoes_internas|linebreaks }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Informação:</strong> Esta denúncia é anônima. Não há informações 
+                            de contato vinculadas. Para mais informações, entre em contato com o administrador.
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <hr>
+                    
+                    <div class="text-center">
+                        <p>
+                            <a href="{% url 'denuncia_anonima' %}" class="text-decoration-none">
+                                <i class="fas fa-arrow-left"></i> Fazer nova denúncia anônima
+                            </a>
+                        </p>
+                        <p class="text-muted small">
+                            <i class="fas fa-shield-alt"></i>
+                            Sistema em conformidade com a LGPD - 
+                            <a href="{% url 'termos_lgpd' %}" class="text-decoration-none">Termos de Uso</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
