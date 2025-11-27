@@ -163,28 +163,6 @@ def acompanhamento_denuncia(request):
 def pagina_termos(request):
     return render(request, 'termos_lgpd.html')
 
-def denuncia_anonima(request):
-    if request.method == 'POST':
-        form = DenunciaForm(request.POST)
-        if form.is_valid():
-            denuncia = form.save(commit=False)
-            denuncia.ip_address = get_client_ip(request)
-            denuncia.user_agent = request.META.get('HTTP_USER_AGENT', '')
-            denuncia.save()
-            
-            messages.success(request, 
-                'Denúncia enviada com sucesso! Seu token de acompanhamento é:')
-            messages.info(request, 
-                f'<strong>{denuncia.token_acompanhamento}</strong>')
-            messages.warning(request, 
-                'Guarde este token em local seguro para acompanhar o andamento da sua denúncia.')
-
-            return redirect('acompanhamento') + f'?token={denuncia.token_acompanhamento}'
-    else:
-        form = DenunciaForm()
-    
-    return render(request, 'denuncia_anonima.html', {'form': form})
-
 def logout_view(request):
     auth_logout(request)
     messages.success(request, 'Você saiu do sistema com sucesso.')
